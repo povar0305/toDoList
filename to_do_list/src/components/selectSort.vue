@@ -1,10 +1,7 @@
 <template>
-  <v-row class="justify-center align-items-center">
-    <v-col class="p-0">
-      Сортировать по :
+  <v-row  class="w-auto justify-center align-items-center">
+       Сортировать по :
 
-    </v-col>
-    <v-col class="p-0">
       <v-select
           @input="sortBy"
           :items="items"
@@ -12,7 +9,6 @@
           solo
           return-object
       ></v-select>
-    </v-col>
   </v-row>
 </template>
 
@@ -48,5 +44,8 @@ export default {
 
 .v-text-field.v-text-field--solo:not(.v-text-field--solo-flat) > .v-input__control > .v-input__slot {
   box-shadow: none !important;
+}
+.v-input{
+  max-width: 120px!important;
 }
 </style>
