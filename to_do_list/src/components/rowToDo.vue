@@ -6,13 +6,13 @@
       ></v-checkbox>
     </div>
     <div class="tabelList_info-name">
-      Описание
+      {{ doing.desc }}
     </div>
     <div class="tabelList_info-status">
-      Статус
+      {{doing.state}}
     </div>
     <div class="tabelList_info-date">
-      Дата
+      {{doing.date}}
     </div>
   </div>
 </template>
@@ -25,6 +25,7 @@ export default {
       result: false,
     }
   },
+  props: ['doing'],
 }
 </script>
 
@@ -64,4 +65,8 @@ export default {
     width: 60%;
   }
 }
+.theme--light.v-messages{
+  display: none!important;
+}
+
 </style>

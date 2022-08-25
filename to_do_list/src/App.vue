@@ -19,7 +19,7 @@
     <div class="row">
       <search-input ></search-input>
     </div>
-<tabel-list></tabel-list>
+<tabel-list :todo="todo"></tabel-list>
 
 
 <!--Надо выделить в отдельный элемент-->
@@ -61,7 +61,17 @@ import TabelList from "@/components/tabelList";
    data(){
 return{
   togglePopup:false,
-  todo:[]
+  todo:[
+    { desc: 'Размещение новостей на сайте' ,state:true,  date:'22.04.2022' },
+    { desc: 'Внедрить Wi-fi для читателей' ,state:false,  date:'25.03.2022' },
+    { desc: 'Отредактировать раздел “Доступная среда”' ,state:true,  date:'15.03.2022' },
+    { desc: 'Презентация “Информационные технологии””' ,state:false,  date:'15.03.2022' },
+    { desc: 'Счётчики — внедрить дизайн”' ,state:false,  date:'09.03.2022' },
+    { desc: 'Сверстать новый layout”' ,state:false,  date:'07.03.2022' },
+    { desc: 'Скролл в новостях”' ,state:true,  date:'01.03.2022' },
+    { desc: 'Форма сброса пароля”' ,state:false,  date:'25.02.2022' },
+    { desc: 'Внедрение модуля Chat”' ,state:true,  date:'20.02.2022' },
+  ]
 }
 
 
@@ -201,4 +211,9 @@ p{
   }
 
 }
+#app > div.row.tabelList > div.row.tabelList_info > div.tabelList_info-check > div > div > div.v-messages.theme--light{
+  display: none!important;
+}
+
+
 </style>

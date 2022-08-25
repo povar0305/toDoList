@@ -14,7 +14,9 @@
       Дата
     </div>
   </div>
-<row-to-do></row-to-do>
+<row-to-do :doing="doing" v-for="doing in this.todo"  :key="doing.desc">
+
+</row-to-do>
 </div>
 </template>
 
@@ -22,7 +24,11 @@
 import RowToDo from "@/components/rowToDo";
 export default {
   name: "tabelList",
-  components: {RowToDo}
+  components: {RowToDo},
+  props:{
+    todo:Array,
+  },
+
 }
 </script>
 
