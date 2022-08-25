@@ -7,7 +7,7 @@
         </h2>
       </div>
      <div class="col-auto px-0">
-       <div class="circle">
+       <div class="circle" @click="showPopupMain">
          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
            <rect x="9" width="2" height="20" fill="#314B99"/>
            <rect x="20" y="9" width="2" height="20" transform="rotate(90 20 9)" fill="#314B99"/>
@@ -19,12 +19,12 @@
     <div class="row">
       <search-input ></search-input>
     </div>
-    <div class="popup">
+    <div class="popup" v-if="togglePopup">
       <div class="popup_main">
         <div class="row popup_main-row-title align-items-center justify-content-between">
           <div class="col-auto p-0"><h3>Создать новую задачу</h3></div>
 
-          <div class="popup_close col-auto px-0 p-0">
+          <div class="popup_close col-auto px-0 p-0" @click="hidePopupMain">
             <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" fill="none">
               <path d="M1 1L4 4M7 7L4 4M4 4L7 1M4 4L1 7" stroke="white" stroke-linecap="round"/>
             </svg>
@@ -53,7 +53,21 @@ import searchInput from "@/components/searchInput";
  export default {
   name: 'App',
   components: {searchInput},
+   data(){
+return{
+  togglePopup:false
+}
 
+
+   },
+methods:{
+  showPopupMain(){
+      this.togglePopup=true
+  },
+  hidePopupMain(){
+      this.togglePopup=false
+  }
+}
 
 }
 </script>
@@ -175,6 +189,7 @@ p{
     margin-bottom: 10px;
     &:hover{
       background-color: $hover_light_blue;
+      color: white;
     }
 
   }
