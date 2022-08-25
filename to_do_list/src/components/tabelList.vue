@@ -1,46 +1,51 @@
 <template>
 <div class="row tabelList">
   <div class="row tabelList_title">
-    <div class="tabelList_check">
+    <div class="tabelList_title-check">
 
     </div>
-    <div class="tabelList_name">
+    <div class="tabelList_title-name">
       Описание
     </div>
-    <div class="tabelList_status">
+    <div class="tabelList_title-status">
       Статус
     </div>
-    <div class="tabelList_date">
+    <div class="tabelList_title-date">
       Дата
     </div>
   </div>
+<row-to-do></row-to-do>
 </div>
 </template>
 
 <script>
+import RowToDo from "@/components/rowToDo";
 export default {
-  name: "tabelList"
+  name: "tabelList",
+  components: {RowToDo}
 }
 </script>
 
 <style scoped lang="scss">
-.tabelList{
+.tabelList_title{
+  padding-bottom: 20px!important;
+  padding-top: 20px!important;
   &>*{
     font-family: VelaSans;
     color: #16191D;
     font-weight: 400;
     font-size: 14px;
   }
-  &_check{
+  &-check{
     border-right: 1px solid #C4C4C4;
     width: 10%;
     height: 100%;
   }
-  &_date,&_status{
+  &-date,&-status{
     width: 15%;
     border-left: 1px solid #C4C4C4;
   }
-  &_name{
+  &-name{
     width: 60%;
   }
 }
