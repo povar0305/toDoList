@@ -19,6 +19,10 @@
     <div class="row">
       <search-input ></search-input>
     </div>
+<tabel-list></tabel-list>
+
+
+<!--Надо выделить в отдельный элемент-->
     <div class="popup" v-if="togglePopup">
       <div class="popup_main">
         <div class="row popup_main-row-title align-items-center justify-content-between">
@@ -50,12 +54,14 @@
 
 <script>
 import searchInput from "@/components/searchInput";
+import TabelList from "@/components/tabelList";
  export default {
   name: 'App',
-  components: {searchInput},
+  components: {TabelList, searchInput},
    data(){
 return{
-  togglePopup:false
+  togglePopup:false,
+  todo:[]
 }
 
 
