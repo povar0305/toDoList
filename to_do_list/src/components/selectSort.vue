@@ -22,7 +22,9 @@ export default {
   },
   methods:{
     sortBy(item){
-      console.log(item) //получили то, по чему сортировать
+      this.$emit(
+'sortby',item
+      )
     }
   }
 }

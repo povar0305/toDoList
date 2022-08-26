@@ -29,7 +29,7 @@
           <input @input="searching" v-model="searchQ" type="text" placeholder="Поиск Имени, статуса или даты">
         </div>
         <div class="col-auto search_sort ">
-          <select-sort></select-sort>
+          <select-sort @sortby="sorting"></select-sort>
         </div>
 
       </div>
@@ -100,6 +100,17 @@ export default {
     hidePopupMain() {
       this.togglePopup = false
     },
+    sortby(bysort){
+      function byField(field) {
+        return (a, b) => a[field] > b[field] ? 1 : -1;
+      }
+      if(bysort=='Date'){
+        this.todo=this.todo.sort(byField('date'))
+      }else{
+        this.todo=this.todo.sort(byField('desc'))
+
+      }
+    },
     addTask() {
       this.todo = JSON.parse(localStorage.getItem('todo'));
       this.todo.id = this.todo[this.todo.length - 1].id + 1;
@@ -111,16 +122,14 @@ export default {
         id: this.todo.id
       }
       this.todo.push(newArray);
-      console.log(this.todo)
-      localStorage.setItem('todo', JSON.stringify(this.todo))
+       localStorage.setItem('todo', JSON.stringify(this.todo))
       this.newDesc = ''
       this.togglePopup = false
 
     },
     searching() {
       return this.todo.filter(el => {
-        console.log('res' + el.desc)
-        console.log(el.desc.includes(this.searchQ))
+         console.log(el.desc.includes(this.searchQ))
         if (el.desc.includes(this.searchQ)) {
           return el
         }
