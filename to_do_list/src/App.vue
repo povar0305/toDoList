@@ -62,15 +62,15 @@ import TabelList from "@/components/tabelList";
 return{
   togglePopup:false,
   todo:[
-    { desc: 'Размещение новостей на сайте' ,state:true,  date:'22.04.2022' },
-    { desc: 'Внедрить Wi-fi для читателей' ,state:false,  date:'25.03.2022' },
-    { desc: 'Отредактировать раздел “Доступная среда”' ,state:true,  date:'15.03.2022' },
-    { desc: 'Презентация “Информационные технологии””' ,state:false,  date:'15.03.2022' },
-    { desc: 'Счётчики — внедрить дизайн”' ,state:false,  date:'09.03.2022' },
-    { desc: 'Сверстать новый layout”' ,state:false,  date:'07.03.2022' },
-    { desc: 'Скролл в новостях”' ,state:true,  date:'01.03.2022' },
-    { desc: 'Форма сброса пароля”' ,state:false,  date:'25.02.2022' },
-    { desc: 'Внедрение модуля Chat”' ,state:true,  date:'20.02.2022' },
+    { desc: 'Размещение новостей на сайте' ,state:true,  date:'22.04.2022',id: 0},
+    { desc: 'Внедрить Wi-fi для читателей' ,state:false,  date:'25.03.2022',id: 2},
+    { desc: 'Отредактировать раздел “Доступная среда”' ,state:true,  date:'15.03.2022',id: 3},
+    { desc: 'Презентация “Информационные технологии””' ,state:false,  date:'15.03.2022' ,id:4},
+    { desc: 'Счётчики — внедрить дизайн”' ,state:false,  date:'09.03.2022',id: 5},
+    { desc: 'Сверстать новый layout”' ,state:false,  date:'07.03.2022',id: 6},
+    { desc: 'Скролл в новостях”' ,state:true,  date:'01.03.2022',id: 7},
+    { desc: 'Форма сброса пароля”' ,state:false,  date:'25.02.2022' ,id:8},
+    { desc: 'Внедрение модуля Chat”' ,state:true,  date:'20.02.2022',id: 9},
   ]
 }
 
@@ -83,7 +83,9 @@ methods:{
   hidePopupMain(){
       this.togglePopup=false
   }
-}
+},mounted(){
+     localStorage.setItem('todo', JSON.stringify(this.todo));
+   }
 
 }
 </script>

@@ -14,7 +14,7 @@
       Дата
     </div>
   </div>
-<row-to-do :doing="doing" v-for="doing in this.todo"  :key="doing.desc">
+<row-to-do :doing="doing" v-for="doing in this.todo"  :key="doing.id">
 
 </row-to-do>
 </div>
