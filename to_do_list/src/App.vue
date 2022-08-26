@@ -110,13 +110,18 @@ export default {
       }
       this.todo.push( newArray);
 console.log(this.todo)
-       newArray = []
+      localStorage.setItem('todo', JSON.stringify(this.todo))
       this.newDesc = ''
       this.togglePopup = false
 
     }
   }, mounted() {
-    localStorage.setItem('todo', JSON.stringify(this.todo));
+    if (JSON.parse(localStorage.getItem('todo'))){
+      this.todo=JSON.parse(localStorage.getItem('todo'))
+    }else{
+      localStorage.setItem('todo', JSON.stringify(this.todo));
+
+    }
   },
 
 
