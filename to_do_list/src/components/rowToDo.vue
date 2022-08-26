@@ -1,10 +1,7 @@
 <template>
   <div class="row tabelList_info ">
     <div class="tabelList_info-check">
-      <!--      <v-checkbox
-                input-value="doing.state"
-                v-model="result"
-            ></v-checkbox>-->
+
       <div class="tabelList_info-check--checkbox "  v-bind:class="{ check: doing.state }" @click="selectWork">
         <svg v-if="doing.state" xmlns='http://www.w3.org/2000/svg' height='11' width='10'  viewBox='0 0 10 11' fill='none'> <path d='M1 5L5 10.5L9.5 1' stroke='#134EC1' stroke-linecap='round' stroke-linejoin='round'/>         </svg>
       </div>
@@ -37,7 +34,7 @@ export default {
   props: ['doing'],
   methods:{
     selectWork(){
-console.log(this.doing.state)
+      console.log(this.doing.state)
     }
   },
 }

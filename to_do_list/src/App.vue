@@ -6,23 +6,23 @@
           To do list
         </h2>
       </div>
-     <div class="col-auto px-0">
-       <div class="circle" @click="showPopupMain">
-         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-           <rect x="9" width="2" height="20" fill="#314B99"/>
-           <rect x="20" y="9" width="2" height="20" transform="rotate(90 20 9)" fill="#314B99"/>
-         </svg>
-       </div>
-     </div>
+      <div class="col-auto px-0">
+        <div class="circle" @click="showPopupMain">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <rect x="9" width="2" height="20" fill="#314B99"/>
+            <rect x="20" y="9" width="2" height="20" transform="rotate(90 20 9)" fill="#314B99"/>
+          </svg>
+        </div>
+      </div>
 
     </div>
     <div class="row">
-      <search-input ></search-input>
+      <search-input></search-input>
     </div>
-<tabel-list :todo="todo"></tabel-list>
+    <tabel-list :todo="todo"></tabel-list>
 
 
-<!--Надо выделить в отдельный элемент-->
+    <!--Надо выделить в отдельный элемент-->
     <div class="popup" v-if="togglePopup">
       <div class="popup_main">
         <div class="row popup_main-row-title align-items-center justify-content-between">
@@ -34,19 +34,20 @@
             </svg>
           </div>
         </div>
-        <div class="row">
+
+        <form class="row" @submit.prevent>
           <p class="px-0">
             Описание
           </p>
-        </div>
+        </form>
         <div class="row">
-          <input type="text" placeholder="Введите описание">
+          <input v-model='newDesc' type="text" placeholder="Введите описание">
         </div>
         <div class="row justify-content-center">
-          <button>Создать</button>
+          <button @click="addTask">Создать</button>
         </div>
       </div>
-  </div>
+    </div>
   </div>
 
 
@@ -55,55 +56,76 @@
 <script>
 import searchInput from "@/components/searchInput";
 import TabelList from "@/components/tabelList";
- export default {
+
+export default {
   name: 'App',
   components: {TabelList, searchInput},
-   data(){
-return{
-  togglePopup:false,
-  todo:[
-    { desc: 'Размещение новостей на сайте' ,state:true,  date:'22.04.2022',id: 0},
-    { desc: 'Внедрить Wi-fi для читателей' ,state:false,  date:'25.03.2022',id: 2},
-    { desc: 'Отредактировать раздел “Доступная среда”' ,state:true,  date:'15.03.2022',id: 3},
-    { desc: 'Презентация “Информационные технологии””' ,state:false,  date:'15.03.2022' ,id:4},
-    { desc: 'Счётчики — внедрить дизайн”' ,state:false,  date:'09.03.2022',id: 5},
-    { desc: 'Сверстать новый layout”' ,state:false,  date:'07.03.2022',id: 6},
-    { desc: 'Скролл в новостях”' ,state:true,  date:'01.03.2022',id: 7},
-    { desc: 'Форма сброса пароля”' ,state:false,  date:'25.02.2022' ,id:8},
-    { desc: 'Внедрение модуля Chat”' ,state:true,  date:'20.02.2022',id: 9},
-  ]
-}
-
-
-   },
-methods:{
-  showPopupMain(){
-      this.togglePopup=true
+  data() {
+    return {
+      togglePopup: false,
+      todo: [
+        {desc: 'Размещение новостей на сайте', state: true, date: '22.04.2022', id: 1},
+        {desc: 'Внедрить Wi-fi для читателей', state: false, date: '25.03.2022', id: 2},
+        {desc: 'Отредактировать раздел “Доступная среда”', state: true, date: '15.03.2022', id: 3},
+        {desc: 'Презентация “Информационные технологии””', state: false, date: '15.03.2022', id: 4},
+        {desc: 'Счётчики — внедрить дизайн”', state: false, date: '09.03.2022', id: 5},
+        {desc: 'Сверстать новый layout”', state: false, date: '07.03.2022', id: 6},
+        {desc: 'Скролл в новостях”', state: true, date: '01.03.2022', id: 7},
+        {desc: 'Форма сброса пароля”', state: false, date: '25.02.2022', id: 8},
+        {desc: 'Внедрение модуля Chat”', state: true, date: '20.02.2022', id: 9},
+      ],
+       newDesc: ''
+    }
   },
-  hidePopupMain(){
-      this.togglePopup=false
-  }
-},mounted(){
-     localStorage.setItem('todo', JSON.stringify(this.todo));
-   }
+  methods: {
+    showPopupMain() {
+      this.togglePopup = true
+    },
+    hidePopupMain() {
+      this.togglePopup = false
+    },
+    addTask() {
+      this.todo = JSON.parse(localStorage.getItem('todo'));
+      this.todo.id = this.todo[this.todo.length - 1].id + 1;
+      this.todo.date = new Date().toLocaleDateString();
+      var newArray = {
+        desc: this.newDesc,
+        state: false,
+        date: this.todo.date,
+        id: this.todo.id
+      }
+      this.todo.push( newArray);
+console.log(this.todo)
+       newArray = []
+      this.todo=[]
+      this.newDesc = ''
+      this.togglePopup = false
+
+    }
+  }, mounted() {
+    localStorage.setItem('todo', JSON.stringify(this.todo));
+  },
+
 
 }
 </script>
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
-$light_violet: #D6DBEB;
-$hover_light_violet:#9497a2;
 
-$blue:#314B99;
+$light_violet: #D6DBEB;
+$hover_light_violet: #9497a2;
+
+$blue: #314B99;
 $hover_blue: #4c7cfa;
 
-$light_blue:#F0F5FF;
+$light_blue: #F0F5FF;
 $hover_light_blue: #b0ceff;
-*{
+* {
   transition: 0.2s;
   outline: none;
 }
+
 #app {
   padding-top: 104px;
   max-width: 1300px;
@@ -111,37 +133,44 @@ $hover_light_blue: #b0ceff;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  & .row{
+
+  & .row {
     padding: 0;
     margin: 0;
   }
 }
-.px-0{
-  padding-left: 0!important;
-  padding-right: 0!important;
+
+.px-0 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
+
 h2 {
   font-family: 'Montserrat', sans-serif;
-  font-size: 24px!important;
+  font-size: 24px !important;
   width: auto;
   letter-spacing: 0em;
   text-align: left;
 }
-h3{
-   font-family: Montserrat;
-  font-size: 18px!important;
+
+h3 {
+  font-family: Montserrat;
+  font-size: 18px !important;
   font-weight: 700 !important;
-    text-align: left;
+  text-align: left;
   margin: 0 !important;
 
 }
-p{
-  font-family: VelaSans;color: #16191D;
+
+p {
+  font-family: VelaSans;
+  color: #16191D;
   font-weight: 400;
-  font-size: 14px!important;
+  font-size: 14px !important;
   margin-bottom: 5px;
 }
-.circle{
+
+.circle {
   width: 40px;
   height: 40px;
   padding: 0;
@@ -150,13 +179,15 @@ p{
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background-color:  $light_violet;
-  &:hover{
+  background-color: $light_violet;
+
+  &:hover {
     background-color: $hover_light_violet;
     cursor: pointer;
   }
 }
-.popup{
+
+.popup {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -165,8 +196,10 @@ p{
   background: rgba(255, 255, 255, 0.01);
   backdrop-filter: blur(4px);
   display: flex;
-  justify-content: center;align-items: center;
-  &_main{
+  justify-content: center;
+  align-items: center;
+
+  &_main {
     background: #FFFFFF;
     width: 100%;
     max-width: 400px;
@@ -174,23 +207,28 @@ p{
     padding: 40px;
     box-shadow: 0px 25px 50px -12px rgba(0, 0, 0, 0.25);
     border-radius: 6px;
-    &-row-title{
-      margin-bottom: 30px!important;
+
+    &-row-title {
+      margin-bottom: 30px !important;
     }
   }
-  &_close{
-    background:$blue ;
+
+  &_close {
+    background: $blue;
     border-radius: 5px;
-    width: 22px!important;
+    width: 22px !important;
     display: flex;
-    justify-content: center;align-items: center;
+    justify-content: center;
+    align-items: center;
     height: 22px;
-    &:hover{
+
+    &:hover {
       background-color: $hover_blue;
       cursor: pointer;
     }
   }
-  & input{
+
+  & input {
     width: 100%;
     background-color: transparent;
     border: 1px solid #DDE2E4;
@@ -198,14 +236,16 @@ p{
     height: 40px;
     margin-bottom: 30px;
   }
-  & button{
+
+  & button {
     color: $blue;
     padding: 12px 40px;
-    background-color:$light_blue;
+    background-color: $light_blue;
     border-radius: 8px;
     max-width: 150px;
     margin-bottom: 10px;
-    &:hover{
+
+    &:hover {
       background-color: $hover_light_blue;
       color: white;
     }
@@ -213,8 +253,9 @@ p{
   }
 
 }
-#app > div.row.tabelList > div.row.tabelList_info > div.tabelList_info-check > div > div > div.v-messages.theme--light{
-  display: none!important;
+
+#app > div.row.tabelList > div.row.tabelList_info > div.tabelList_info-check > div > div > div.v-messages.theme--light {
+  display: none !important;
 }
 
 
