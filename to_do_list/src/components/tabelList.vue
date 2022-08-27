@@ -1,23 +1,23 @@
 <template>
-<div class="row tabelList">
-  <div class="row tabelList_title">
-    <div class="tabelList_title-check">
+  <div class="row tabelList">
+    <div class="row tabelList_title">
+      <div class="tabelList_title-check">
 
+      </div>
+      <div class="tabelList_title-name">
+        Описание
+      </div>
+      <div class="tabelList_title-status">
+        Статус
+      </div>
+      <div class="tabelList_title-date">
+        Дата
+      </div>
     </div>
-    <div class="tabelList_title-name">
-      Описание
-    </div>
-    <div class="tabelList_title-status">
-      Статус
-    </div>
-    <div class="tabelList_title-date">
-      Дата
-    </div>
+    <row-to-do @selectWork="selectWork" :doing="doing" v-for="doing in this.todo"  :key="doing.desc">
+
+    </row-to-do>
   </div>
-<row-to-do @selectWork="selectWork" :doing="doing" v-for="doing in this.todo"  :key="doing.id">
-
-</row-to-do>
-</div>
 </template>
 
 <script>
@@ -29,7 +29,7 @@ export default {
     todo:Array,
   },methods:{
     selectWork(elem){
-       this.$emit('selectWorkMain', {
+      this.$emit('selectWorkMain', {
         elem:elem
       })
     }
@@ -39,9 +39,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 .tabelList_title{
   padding-bottom: 20px!important;
   padding-top: 20px!important;
+  @media(max-width: 768px){
+    display: none;
+  }
   &>*{
     font-family: VelaSans;
     color: #16191D;
