@@ -14,7 +14,7 @@
       Дата
     </div>
   </div>
-<row-to-do :doing="doing" v-for="doing in this.todo"  :key="doing.id">
+<row-to-do @selectWork="selectWork" :doing="doing" v-for="doing in this.todo"  :key="doing.id">
 
 </row-to-do>
 </div>
@@ -27,7 +27,13 @@ export default {
   components: {RowToDo},
   props:{
     todo:Array,
-  },
+  },methods:{
+    selectWork(elem){
+       this.$emit('selectWorkMain', {
+        elem:elem
+      })
+    }
+  }
 
 }
 </script>

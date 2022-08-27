@@ -34,7 +34,11 @@ export default {
   props: ['doing'],
   methods:{
     selectWork(){
-      console.log(this.doing.state)
+
+      this.$emit('selectWork', {
+        state: this.doing.state,
+        id:this.doing.id
+      })
     }
   },
 }

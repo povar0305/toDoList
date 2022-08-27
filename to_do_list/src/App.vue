@@ -34,7 +34,7 @@
 
       </div>
     </div>
-    <tabel-list :todo="searching()"></tabel-list>
+    <tabel-list @selectWorkMain="selectWorkMain" :todo="searching()"></tabel-list>
 
 
     <!--Надо выделить в отдельный элемент-->
@@ -100,23 +100,26 @@ export default {
     hidePopupMain() {
       this.togglePopup = false
     },
-    sorting(sortby){
-      console.log(sortby)
-      if(sortby=='Дате'){
+    sorting(sortby) {
+       if (sortby == 'Дате') {
         this.todo = this.todo.sort((task1, task2) => task1['date'] > task2['date'] ? 1 : -1);
 
-      }else if(sortby=='Статусу'){
+      } else if (sortby == 'Статусу') {
         this.todo = this.todo.sort((task1, task2) => task1['state'] > task2['state'] ? 1 : -1);
 
       }
+    },
+    selectWorkMain(elem) {
 
-/*
-      if(bysort=='Date'){
-        this.todo=this.todo.sort()
-      }else{
-        this.todo=this.todo.sort()
 
-      }*/
+      let updateElement = this.todo.find(
+          function (element) {
+            return element.id === elem.elem.id
+          }
+      )
+      updateElement.state=true
+      localStorage.setItem('todo', JSON.stringify(this.todo))
+
     },
     addTask() {
       this.todo = JSON.parse(localStorage.getItem('todo'));
@@ -129,7 +132,7 @@ export default {
         id: this.todo.id
       }
       this.todo.push(newArray);
-       localStorage.setItem('todo', JSON.stringify(this.todo))
+      localStorage.setItem('todo', JSON.stringify(this.todo))
       this.newDesc = ''
       this.togglePopup = false
 
