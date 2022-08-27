@@ -1,6 +1,6 @@
 <template>
   <div id="app" data-app>
-    <div class="row justify-content-between align-items-center">
+    <div class="row_title row justify-content-between align-items-center">
       <div class="col-auto px-0">
         <h2>
           To do list
@@ -50,13 +50,13 @@
           </div>
         </div>
 
-        <form class="row" @submit.prevent>
+        <form class="row" >
           <p class="px-0">
             Описание
           </p>
         </form>
         <div class="row">
-          <input v-model='newDesc' type="text" placeholder="Введите описание">
+          <input required v-model='newDesc' type="text" placeholder="Введите описание">
         </div>
         <div class="row justify-content-center">
           <button @click="addTask">Создать</button>
@@ -101,12 +101,11 @@ export default {
       this.togglePopup = false
     },
     sorting(sortby) {
-       if (sortby == 'Дате') {
+      if (sortby == 'Дате') {
         this.todo = this.todo.sort((task1, task2) => task1['date'] > task2['date'] ? 1 : -1);
 
       } else if (sortby == 'Статусу') {
         this.todo = this.todo.sort((task1, task2) => task1['state'] > task2['state'] ? 1 : -1);
-
       }
     },
     selectWorkMain(elem) {
@@ -139,6 +138,8 @@ export default {
     },
     searching() {
       return this.todo.filter(el => {
+        /*console.log(el.desc.includes(this.searchQ))
+        console.log(this.searchQ)*/
         if (el.desc.includes(this.searchQ)) {
           return el
         }
@@ -181,10 +182,21 @@ $hover_light_blue: #b0ceff;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  padding-bottom: 104px;
+  @media(max-width: 625px){
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 
+  }
   & .row {
     padding: 0;
     margin: 0;
+  }
+  & .row_title{
+    @media(max-width: 625px){
+      padding-left: 10px!important;
+      padding-right: 10px!important;
+    }
   }
 }
 
@@ -238,7 +250,7 @@ p {
 .popup {
   width: 100%;
   height: 100%;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background: rgba(255, 255, 255, 0.01);
@@ -255,7 +267,10 @@ p {
     padding: 40px;
     box-shadow: 0px 25px 50px -12px rgba(0, 0, 0, 0.25);
     border-radius: 6px;
-
+    @media(max-width: 625px){
+      padding-left: 25px;
+      padding-right: 25px;
+    }
     &-row-title {
       margin-bottom: 30px !important;
     }
@@ -330,6 +345,10 @@ input {
 
   &_input {
     flex: 1;
+    @media(max-width: 625px){
+      width: calc(100% - 50px) !important;
+      flex: auto;
+    }
 
     & input {
       width: 100%;
