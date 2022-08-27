@@ -100,16 +100,23 @@ export default {
     hidePopupMain() {
       this.togglePopup = false
     },
-    sortby(bysort){
-      function byField(field) {
-        return (a, b) => a[field] > b[field] ? 1 : -1;
-      }
-      if(bysort=='Date'){
-        this.todo=this.todo.sort(byField('date'))
-      }else{
-        this.todo=this.todo.sort(byField('desc'))
+    sorting(sortby){
+      console.log(sortby)
+      if(sortby=='Дате'){
+        this.todo = this.todo.sort((task1, task2) => task1['date'] > task2['date'] ? 1 : -1);
+
+      }else if(sortby=='Статусу'){
+        this.todo = this.todo.sort((task1, task2) => task1['state'] > task2['state'] ? 1 : -1);
 
       }
+
+/*
+      if(bysort=='Date'){
+        this.todo=this.todo.sort()
+      }else{
+        this.todo=this.todo.sort()
+
+      }*/
     },
     addTask() {
       this.todo = JSON.parse(localStorage.getItem('todo'));
@@ -129,7 +136,6 @@ export default {
     },
     searching() {
       return this.todo.filter(el => {
-         console.log(el.desc.includes(this.searchQ))
         if (el.desc.includes(this.searchQ)) {
           return el
         }
