@@ -1,8 +1,13 @@
 module.exports ={
-  outputDir: './public',
-  publicPath: './',
+
 
   transpileDependencies: [
     'vuetify'
   ]
+}
+
+module.exports = {
+  publicPath: process.env.NODE_ENV === 'production'
+      ? '/user_list_post/'
+      : '/'
 }
